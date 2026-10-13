@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 
-// One preview image per step, matched by index (step 1 → process-1, step
-// 2 → process-2, step 3 → process-3) — not a per-item crossfade, on
+// One preview image per step, matched by index (step 1 → process-a, step
+// 2 → process-b, step 3 → process-c) — not a per-item crossfade, on
 // request ("itu kan ada steps di section itu. step satu pake gambar
 // process-1, step 2 pake process-2, dan seterusnya"), replacing an
 // earlier version of this component where every item cycled through all
@@ -19,9 +19,9 @@ import Image from "next/image";
 // matching this component's own preview aspect ratio almost exactly), so
 // `object-cover` crops only marginally.
 const PROCESS_STEP_IMAGES = [
-  { src: "/process/process-1.png", alt: "Project scoping checklist" },
-  { src: "/process/process-2.png", alt: "Design, development, and AI services pipeline" },
-  { src: "/process/process-3.png", alt: "Active users and revenue results dashboard" },
+  { src: "/process/process-a.png", alt: "Project scoping checklist" },
+  { src: "/process/process-b.png", alt: "Design, development, and AI services pipeline" },
+  { src: "/process/process-c.png", alt: "Active users and revenue results dashboard" },
 ];
 
 type ServiceItem = {

@@ -2,36 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import type { Project } from "@/types/work";
 import { trackEvent } from "@/lib/analytics/track-event";
 
 const CYCLE_MS = 1300;
-
-const noopSubscribe = () => () => {};
-
-/** Not-hovered default image, randomized among `[coverImage, ...showcaseImages]`
- * instead of always `coverImage` — via `useSyncExternalStore` (same pattern
- * `useReduceMotion` uses in useScrollDriver.tsx) rather than `useState` +
- * `useEffect`, since a `Math.random()` pick needs to differ safely between
- * server and client without a hydration mismatch: `getServerSnapshot`
- * always returns `coverImage` (what the server rendered), `getSnapshot`
- * picks once per mount and caches it in a ref so it stays stable across
- * re-renders. */
-function useRandomDefaultImage(coverImage: string, showcaseImages: string[]) {
-  const pickedRef = useRef<string | null>(null);
-  return useSyncExternalStore(
-    noopSubscribe,
-    () => {
-      if (pickedRef.current === null) {
-        const pool = [coverImage, ...showcaseImages];
-        pickedRef.current = pool[Math.floor(Math.random() * pool.length)];
-      }
-      return pickedRef.current;
-    },
-    () => coverImage
-  );
-}
 
 // Fallback aspect ratio only — used until the real image has loaded
 // client-side and reported its own natural size (see `aspectRatio` state
@@ -52,7 +27,9 @@ type ProjectCardProps = {
 export function ProjectCard({ project, revealed }: ProjectCardProps) {
   const [hovered, setHovered] = useState(false);
   const [imageIndex, setImageIndex] = useState(0);
-  const defaultImage = useRandomDefaultImage(project.coverImage, project.showcaseImages);
+  // Resting (not-hovered) thumbnail — always the CMS's own "Cover image
+  // (list card)" field, not randomized among showcaseImages (on request).
+  const defaultImage = project.coverImage;
 
   // Each card fits its own resting/default image's real proportions
   // instead of every card in the grid sharing one fixed shape — set once

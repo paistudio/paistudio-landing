@@ -8,4 +8,13 @@
   --color-deep: #0b3d91;
   --color-mint: #a9d6e5;
   --color-pill: #d4ebf2;
+
+  /* Semantic — status pills, form errors, destructive actions. Each is a
+   * single solid color; a light pill tint is `bg-{name}/15` (or similar)
+   * over `text-{name}`, not a separate "-bg" token, matching how `mint`/
+   * `cream` already pair a light-opacity background with a solid text
+   * color elsewhere in this theme. */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
 }

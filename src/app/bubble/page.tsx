@@ -58,6 +58,7 @@ export default function BubblePage() {
                 title: "Complex Application Logic",
                 description: "Unlike basic no-code tools, Bubble development done right supports conditional workflows and custom states.",
                 previewLabel: "Conditional workflow editor",
+                previewImage: { src: "/prismatic-icons/bubble-1.png", alt: "Conditional workflow editor" },
               },
               {
                 title: "Faster Than Custom Code",
@@ -85,17 +86,17 @@ export default function BubblePage() {
               {
                 label: "Application Build",
                 description: "We build your full application in Bubble, including custom workflows and UI.",
-                image: { src: "/services/full-stack-dev.png", alt: "Bubble app editor — pages, workflows, and data in one interface" },
+                image: { src: "/services/fullstack.png", alt: "Bubble app editor — pages, workflows, and data in one interface" },
               },
               {
                 label: "API & Plugin Integration",
                 description: "We connect external services and data sources to your app.",
-                image: { src: "/services/integrations.png", alt: "Integrations panel connecting your app to external services" },
+                image: { src: "/services/integration.png", alt: "Integrations panel connecting your app to external services" },
               },
               {
                 label: "Performance & Scaling",
                 description: "We optimize workflows and data structure as your usage grows.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />

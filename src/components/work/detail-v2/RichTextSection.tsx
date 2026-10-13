@@ -3,14 +3,9 @@
 import { revealStyle, useReduceMotion, useScrollDriver } from "@/lib/scroll/useScrollDriver";
 
 type RichTextSectionProps = {
-  /** Static paragraphs for now. Per the brief, this block is meant to
-   * become a rich-text/CMS-driven field later — kept as a plain
-   * `string[]` (one paragraph per entry, same as ArticleBody's
-   * "paragraph" block type) rather than pre-building a rich-text schema
-   * nothing yet consumes. Swap the data source here once that field
-   * exists; the markup below (plain `<p>`s) already matches ArticleBody's
-   * own paragraph treatment, so a straightforward block-renderer can
-   * replace this without a visual change. */
+  /** One HTML string per paragraph — written via the Work CMS's
+   * `RichParagraphField` (bold/italic/link only, via the browser's
+   * `execCommand`), trusted CMS-authored content, not public user input. */
   paragraphs: string[];
   revealId: string;
 };
@@ -27,9 +22,11 @@ export function RichTextSection({ paragraphs, revealId }: RichTextSectionProps) 
       style={revealStyle(revealed, revealId, reduceMotion)}
     >
       {paragraphs.map((paragraph, i) => (
-        <p key={i} className="m-0 text-[18px] leading-[1.6] text-muted">
-          {paragraph}
-        </p>
+        <p
+          key={i}
+          className="m-0 text-[18px] leading-[1.6] text-muted [&_a]:text-brand [&_a]:underline"
+          dangerouslySetInnerHTML={{ __html: paragraph }}
+        />
       ))}
     </div>
   );

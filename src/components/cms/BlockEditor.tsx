@@ -81,7 +81,7 @@ export function BlockEditor({ initialBlocks }: { initialBlocks: ArticleBlock[] }
         {blocks.map((block, index) => {
           const TypeIcon = BLOCK_TYPE_ICONS[block.type];
           return (
-            <div key={index} className="rounded-2xl border border-ink/10 bg-paper p-4">
+            <div key={index} className="rounded-2xl border border-ink/10 bg-paper p-5">
               <div className="mb-3 flex items-center justify-between">
                 <span className="flex items-center gap-1.5 text-xs font-medium tracking-[0.04em] text-muted uppercase">
                   <TypeIcon size={14} />

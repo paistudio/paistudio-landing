@@ -142,17 +142,23 @@ export function ServicesSection({ headline, tools }: ServicesSectionProps) {
                 <p className="m-0 mb-7 max-w-[520px] text-[16px] leading-[1.6] text-muted">{tool.description}</p>
                 {tool.image ? (
                   <div
-                    className="relative flex items-center justify-center overflow-hidden rounded-[32px] bg-[#E0E0E0]"
-                    style={{ aspectRatio: "16 / 10" }}
+                    className="relative flex items-center justify-center overflow-hidden rounded-[32px]"
+                    style={{
+                      aspectRatio: "16 / 10",
+                      background: "linear-gradient(180deg, #04070b 0%, #040c11 30%, #06102e 60%, #0b3d91 100%)",
+                    }}
                   >
                     <Image src={tool.image.src} alt={tool.image.alt} fill className="object-cover" />
                   </div>
                 ) : (
                   <div
-                    className="flex items-center justify-center overflow-hidden rounded-[32px] bg-[#E0E0E0]"
-                    style={{ aspectRatio: "16 / 10" }}
+                    className="flex items-center justify-center overflow-hidden rounded-[32px]"
+                    style={{
+                      aspectRatio: "16 / 10",
+                      background: "linear-gradient(180deg, #04070b 0%, #040c11 30%, #06102e 60%, #0b3d91 100%)",
+                    }}
                   >
-                    <span className="text-[12px] tracking-[0.1em] text-muted uppercase">
+                    <span className="text-[12px] tracking-[0.1em] text-white/50 uppercase">
                       Image placeholder{tool.previewLabel ? ` — ${tool.previewLabel}` : ""}
                     </span>
                   </div>

@@ -61,18 +61,21 @@ export default function InternalToolsDevelopmentPage() {
                 title: "Built Around Your Workflow",
                 description: "Unlike generic SaaS tools, internal tools development done right adapts to your process, not the other way around.",
                 previewLabel: "Custom workflow layout",
+                previewImage: { src: "/prismatic-icons/v2-internal-1.png", alt: "Custom workflow layout" },
               },
               {
                 title: "Direct Data Integration",
                 description:
                   "One of the key advantages of working with us is pulling directly from your existing databases — no manual re-entry.",
                 previewLabel: "Live database connection",
+                previewImage: { src: "/prismatic-icons/v2-internal-2.png", alt: "Live database connection" },
               },
               {
                 title: "Low Long-Term Overhead",
                 description:
                   "As your team grows, structure matters. Our internal tools development approach is built to be maintained by a small team, not a dedicated engineering org.",
                 previewLabel: "Maintenance checklist",
+                previewImage: { src: "/prismatic-icons/v2-internal-3.png", alt: "Maintenance checklist" },
               },
             ]}
           />
@@ -83,22 +86,22 @@ export default function InternalToolsDevelopmentPage() {
               {
                 label: "Workflow & Requirements Mapping",
                 description: "We understand how your team actually works before designing anything.",
-                image: { src: "/services/mp-mapping.png", alt: "Process flow map — ordered steps in a real team workflow" },
+                image: { src: "/services/mpmapping.png", alt: "Process flow map — ordered steps in a real team workflow" },
               },
               {
                 label: "Tool Development",
                 description: "We build dashboards, admin panels, or ops tools tailored to your process.",
-                image: { src: "/services/full-stack-dev.png", alt: "Full-stack app editor — data, workflows, and pages in one interface" },
+                image: { src: "/services/fullstack.png", alt: "Full-stack app editor — data, workflows, and pages in one interface" },
               },
               {
                 label: "Data & System Integration",
                 description: "We connect your tool directly to existing databases and services.",
-                image: { src: "/services/integrations.png", alt: "Integrations panel connecting your tool to existing databases and services" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
               {
                 label: "Iteration & Expansion",
                 description: "We extend your tool as your internal processes evolve.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />

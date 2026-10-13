@@ -61,18 +61,21 @@ export default function AiProductsPage() {
                 description:
                   "Unlike generic AI features, AI product development done right scopes features to what the model can actually do reliably.",
                 previewLabel: "Feasibility scoping doc",
+                previewImage: { src: "/prismatic-icons/v2-ai-1.png", alt: "Feasibility scoping doc" },
               },
               {
                 title: "Grounded, Not Guessing",
                 description:
                   "One of the key advantages of working with us is retrieval and grounding pipelines that reduce hallucination on your own data.",
                 previewLabel: "Retrieval pipeline diagram",
+                previewImage: { src: "/prismatic-icons/v2-ai-2.png", alt: "Retrieval pipeline diagram" },
               },
               {
                 title: "Evaluated Before Launch",
                 description:
                   "As AI features become core to your product, structure matters. Our AI product development approach uses structured evaluation, not manual spot-checking.",
                 previewLabel: "Evaluation harness dashboard",
+                previewImage: { src: "/prismatic-icons/v2-ai-3.png", alt: "Evaluation harness dashboard" },
               },
             ]}
           />
@@ -88,17 +91,17 @@ export default function AiProductsPage() {
               {
                 label: "Model & Pipeline Development",
                 description: "We build prompting, retrieval, and orchestration pipelines around your chosen model.",
-                image: { src: "/services/full-stack-dev.png", alt: "App editor — pipeline logic, data, and workflows in one interface" },
+                image: { src: "/services/fullstack.png", alt: "App editor — pipeline logic, data, and workflows in one interface" },
               },
               {
                 label: "Evaluation & Guardrails",
                 description: "We build evaluation harnesses and safety guardrails before anything ships.",
-                image: { src: "/services/mp-mapping.png", alt: "Structured evaluation flow — ordered checks from step to step" },
+                image: { src: "/services/mpmapping.png", alt: "Structured evaluation flow — ordered checks from step to step" },
               },
               {
                 label: "Monitoring & Iteration",
                 description: "We track real-world performance and refine your AI product after launch.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />

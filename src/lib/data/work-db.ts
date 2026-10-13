@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import type { Project, ProjectDetail, ProjectImageRef, ProjectTestimonial } from "@/types/work";
+import type { Project, ProjectCategory, ProjectDetail, ProjectImageRef, ProjectTestimonial } from "@/types/work";
 
 export { sql };
 
@@ -14,9 +14,12 @@ export type WorkProjectRow = {
   title: string;
   description: string;
   cover_image: string;
+  index_thumbnail: string | null;
   showcase_images: string[];
   tags: string[];
   badge: string | null;
+  categories: string[];
+  is_visible: boolean;
   sort_order: number;
   detail_title: string;
   detail_description: string;
@@ -34,9 +37,13 @@ export function rowToProject(row: WorkProjectRow): Project {
     title: row.title,
     description: row.description,
     coverImage: row.cover_image,
+    indexThumbnail: row.index_thumbnail ?? undefined,
     showcaseImages: row.showcase_images,
     tags: row.tags,
     badge: row.badge ?? undefined,
+    // Written only by the CMS form's fixed checkbox options (see
+    // PROJECT_CATEGORIES), so this cast is safe.
+    categories: row.categories as ProjectCategory[],
   };
 }
 

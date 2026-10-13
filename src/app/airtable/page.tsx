@@ -87,17 +87,17 @@ export default function AirtablePage() {
               {
                 label: "Automation & Interface Build",
                 description: "We build native Airtable automations and interfaces for your team.",
-                image: { src: "/services/airtable-automation.png", alt: "Airtable base interface — views, tabs, and automations" },
+                image: { src: "/services/airtable.png", alt: "Airtable base interface — views, tabs, and automations" },
               },
               {
                 label: "External Integration",
                 description: "We connect Airtable to your other tools via API or automation platforms.",
-                image: { src: "/services/integrations.png", alt: "Integrations panel connecting your base to other tools" },
+                image: { src: "/services/integration.png", alt: "Integrations panel connecting your base to other tools" },
               },
               {
                 label: "Structure Refinement",
                 description: "We refactor and extend your base as your operational needs evolve.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />

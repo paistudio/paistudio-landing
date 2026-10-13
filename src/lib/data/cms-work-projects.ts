@@ -6,9 +6,12 @@ export type NewWorkProjectInput = {
   title: string;
   description: string;
   coverImage: string;
+  indexThumbnail: string | null;
   showcaseImages: string[];
   tags: string[];
   badge: string | null;
+  categories: string[];
+  isVisible: boolean;
   sortOrder: number;
   detailTitle: string;
   detailDescription: string;
@@ -61,12 +64,12 @@ export async function insertWorkProject(input: NewWorkProjectInput): Promise<{ s
     try {
       await sql`
         INSERT INTO work_projects (
-          slug, title, description, cover_image, showcase_images, tags, badge, sort_order,
+          slug, title, description, cover_image, index_thumbnail, showcase_images, tags, badge, categories, is_visible, sort_order,
           detail_title, detail_description, curved_image, testimonial_image, testimonial,
           rich_text, full_width_image, split_images
         ) VALUES (
-          ${slug}, ${input.title}, ${input.description}, ${input.coverImage},
-          ${input.showcaseImages as unknown as string}, ${input.tags as unknown as string}, ${input.badge}, ${input.sortOrder},
+          ${slug}, ${input.title}, ${input.description}, ${input.coverImage}, ${input.indexThumbnail},
+          ${input.showcaseImages as unknown as string}, ${input.tags as unknown as string}, ${input.badge}, ${input.categories as unknown as string}, ${input.isVisible}, ${input.sortOrder},
           ${input.detailTitle}, ${input.detailDescription},
           ${JSON.stringify(input.curvedImage)}::jsonb, ${JSON.stringify(input.testimonialImage)}::jsonb,
           ${input.testimonial ? JSON.stringify(input.testimonial) : null}::jsonb,
@@ -99,9 +102,12 @@ export async function updateWorkProjectRow(
           title = ${input.title},
           description = ${input.description},
           cover_image = ${input.coverImage},
+          index_thumbnail = ${input.indexThumbnail},
           showcase_images = ${input.showcaseImages as unknown as string},
           tags = ${input.tags as unknown as string},
           badge = ${input.badge},
+          categories = ${input.categories as unknown as string},
+          is_visible = ${input.isVisible},
           sort_order = ${input.sortOrder},
           detail_title = ${input.detailTitle},
           detail_description = ${input.detailDescription},
@@ -124,4 +130,11 @@ export async function updateWorkProjectRow(
 /** Plain function, same rationale as insertWorkProject. */
 export async function deleteWorkProjectRow(slug: string): Promise<void> {
   await sql`DELETE FROM work_projects WHERE slug = ${slug}`;
+}
+
+/** Single-column update for the Work CMS list's quick show/hide toggle —
+ * deliberately not routed through updateWorkProjectRow, which needs the
+ * entire row's data (every detail-page field) just to flip one boolean. */
+export async function setWorkProjectVisibility(slug: string, isVisible: boolean): Promise<void> {
+  await sql`UPDATE work_projects SET is_visible = ${isVisible} WHERE slug = ${slug}`;
 }

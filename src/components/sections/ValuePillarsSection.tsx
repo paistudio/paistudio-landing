@@ -1,20 +1,29 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 type Pillar = {
   title: string;
   description: string;
-  /** Describes what the (currently placeholder) preview image would show
-   * — e.g. "Create account form". Purely a placeholder caption, not a
-   * real image src/alt yet; see the component doc comment. */
+  /** Describes what the preview image shows — e.g. "Create account form".
+   * Used as the placeholder caption when `previewImage` is omitted. */
   previewLabel?: string;
+  /** Real image shown in the hover-reveal panel instead of the
+   * placeholder caption. Omit to keep the placeholder (every pillar not
+   * explicitly given one). */
+  previewImage?: { src: string; alt: string };
 };
 
 type ValuePillarsSectionProps = {
   /** Exactly 3 — redesigned from the original spec's 4-pillar 2×2 grid to
    * a 3-column hover-expand layout, on direct request. */
   pillars: Pillar[];
+  /** Hovered-card background — `bg-deep` by default, consistent across
+   * every "What We Build" page (was `bg-ink`, briefly `bg-deep` only on AI
+   * Products — made uniform on request). Override only if a future page
+   * genuinely needs a different hover color. */
+  hoverBgClassName?: string;
 };
 
 /** SEC-02 · Value Pillars — redesigned on direct request from the
@@ -51,7 +60,7 @@ type ValuePillarsSectionProps = {
  * the resizing automatically. Duration is 350ms ease-out throughout,
  * inside the spec's requested 300–400ms range.
  */
-export function ValuePillarsSection({ pillars }: ValuePillarsSectionProps) {
+export function ValuePillarsSection({ pillars, hoverBgClassName = "bg-deep" }: ValuePillarsSectionProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   if (process.env.NODE_ENV !== "production" && pillars.length !== 3) {
@@ -70,7 +79,7 @@ export function ValuePillarsSection({ pillars }: ValuePillarsSectionProps) {
               onMouseLeave={() => setHoveredIndex(null)}
               className={`relative flex min-h-[280px] basis-0 overflow-hidden rounded-[24px] p-8 transition-[flex-grow,background-color] duration-[350ms] ease-out max-[700px]:min-h-[240px] ${
                 i > 0 ? "max-[700px]:border-t max-[700px]:border-ink/8" : ""
-              } ${isHovered ? "bg-paper shadow-[0_16px_40px_rgba(0,0,0,0.1)]" : "bg-transparent"}`}
+              } ${isHovered ? `${hoverBgClassName} shadow-[0_16px_40px_rgba(0,0,0,0.1)]` : "bg-transparent"}`}
               style={{ flexGrow: isHovered ? 1.7 : 1 }}
             >
               {/* h-stack: text column + image column, both ordinary flex
@@ -81,12 +90,22 @@ export function ValuePillarsSection({ pillars }: ValuePillarsSectionProps) {
                   style={{ flexGrow: 1 }}
                 >
                   <div>
-                    <span className="text-[13px] tracking-[0.04em] text-ink/30">{String(i + 1).padStart(2, "0")}</span>
-                    <h3 className="m-0 mt-3 text-[22px] leading-[1.2] font-bold tracking-[-0.01em] text-text">
+                    <span
+                      className={`text-[13px] tracking-[0.04em] transition-colors duration-[350ms] ${isHovered ? "text-white/30" : "text-ink/30"}`}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3
+                      className={`m-0 mt-3 text-[22px] leading-[1.2] font-bold tracking-[-0.01em] transition-colors duration-[350ms] ${isHovered ? "text-white" : "text-text"}`}
+                    >
                       {pillar.title}
                     </h3>
                   </div>
-                  <p className="m-0 text-[14px] leading-[1.6] text-muted">{pillar.description}</p>
+                  <p
+                    className={`m-0 text-[14px] leading-[1.6] transition-colors duration-[350ms] ${isHovered ? "text-white/70" : "text-muted"}`}
+                  >
+                    {pillar.description}
+                  </p>
                 </div>
 
                 {/* Placeholder preview image — zero width/invisible at
@@ -94,14 +113,18 @@ export function ValuePillarsSection({ pillars }: ValuePillarsSectionProps) {
                     in on hover. */}
                 <div
                   aria-hidden="true"
-                  className="basis-0 overflow-hidden rounded-[18px] bg-[#E0E0E0] transition-[flex-grow,opacity] duration-[350ms] ease-out"
+                  className={`relative basis-0 overflow-hidden rounded-[18px] transition-[flex-grow,opacity] duration-[350ms] ease-out ${pillar.previewImage ? "" : "bg-[#E0E0E0]"}`}
                   style={{ flexGrow: isHovered ? 1 : 0, opacity: isHovered ? 1 : 0 }}
                 >
-                  <div className="flex h-full min-w-[120px] items-center justify-center p-3 text-center">
-                    <span className="text-[11px] tracking-[0.08em] text-muted uppercase">
-                      Image placeholder{pillar.previewLabel ? ` — ${pillar.previewLabel}` : ""}
-                    </span>
-                  </div>
+                  {pillar.previewImage ? (
+                    <Image src={pillar.previewImage.src} alt={pillar.previewImage.alt} fill className="object-contain p-6" />
+                  ) : (
+                    <div className="flex h-full min-w-[120px] items-center justify-center p-3 text-center">
+                      <span className="text-[11px] tracking-[0.08em] text-muted uppercase">
+                        Image placeholder{pillar.previewLabel ? ` — ${pillar.previewLabel}` : ""}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

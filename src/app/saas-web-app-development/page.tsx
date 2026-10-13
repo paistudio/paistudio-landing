@@ -92,18 +92,21 @@ export default function SaasWebAppDevelopmentPage() {
                 description:
                   "Unlike a quick prototype, SaaS development done right is built to handle real users and real load from day one.",
                 previewLabel: "Load-tested architecture diagram",
+                previewImage: { src: "/prismatic-icons/v2-saas-1.png", alt: "Load-tested architecture diagram" },
               },
               {
                 title: "Full-Stack Ownership",
                 description:
                   "One of the key advantages of working with us is full ownership of your stack — frontend, backend, and infrastructure handled as one coherent system.",
                 previewLabel: "Full-stack system map",
+                previewImage: { src: "/prismatic-icons/v2-saas-2.png", alt: "Full-stack system map" },
               },
               {
                 title: "Scalable, API-First Design",
                 description:
                   "As your product grows, structure matters. Our SaaS development approach uses API-first design and modular architecture, so your product scales without a rewrite.",
                 previewLabel: "API-first module diagram",
+                previewImage: { src: "/prismatic-icons/v2-saas-3.png", alt: "API-first module diagram" },
               },
             ]}
           />
@@ -119,13 +122,13 @@ export default function SaasWebAppDevelopmentPage() {
               {
                 label: "Full-Stack Development",
                 description: "We build your frontend, backend, and database as one connected system, not disconnected pieces.",
-                image: { src: "/services/full-stack-dev.png", alt: "Full-stack app editor — data, workflows, and pages in one interface" },
+                image: { src: "/services/fullstack.png", alt: "Full-stack app editor — data, workflows, and pages in one interface" },
               },
               {
                 label: "API & AI Integration",
                 description: "From payments to AI services, we connect the tools your product actually needs to run.",
                 image: {
-                  src: "/services/integrations.png",
+                  src: "/services/integration.png",
                   alt: "Integrations panel — Stripe, Supabase, and Claude connected to your product",
                 },
               },
@@ -133,7 +136,7 @@ export default function SaasWebAppDevelopmentPage() {
                 label: "Scaling & Maintenance",
                 description:
                   "As your business grows, we continuously refine and expand your product to maintain stability and performance.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />

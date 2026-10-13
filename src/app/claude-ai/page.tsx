@@ -90,17 +90,17 @@ export default function ClaudeAiPage() {
               {
                 label: "Prompt & Pipeline Development",
                 description: "We design prompting, context management, and tool-use architecture.",
-                image: { src: "/services/full-stack-dev.png", alt: "App editor — pipeline logic, data, and workflows in one interface" },
+                image: { src: "/services/fullstack.png", alt: "App editor — pipeline logic, data, and workflows in one interface" },
               },
               {
                 label: "Evaluation & Guardrails",
                 description: "We build evaluation sets and safety guardrails before launch.",
-                image: { src: "/services/mp-mapping.png", alt: "Structured evaluation flow — ordered checks from step to step" },
+                image: { src: "/services/mpmapping.png", alt: "Structured evaluation flow — ordered checks from step to step" },
               },
               {
                 label: "Monitoring & Iteration",
                 description: "We track real-world performance and refine after launch.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />

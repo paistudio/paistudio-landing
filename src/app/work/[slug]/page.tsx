@@ -59,7 +59,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<Pa
       <div className="relative w-full bg-paper text-text">
         <Nav theme="light" chromeVariant="v2" />
         <main data-nav-bg="light" className="min-h-screen bg-paper">
-          <HeroV2 title={project.detailTitle} description={project.detailDescription} />
+          <HeroV2 title={project.detailTitle} description={project.description} />
 
           <CurvedRevealImage src={project.curvedImage.src} alt={project.curvedImage.alt} revealId="v2-curve" />
 

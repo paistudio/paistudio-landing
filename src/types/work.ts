@@ -1,11 +1,30 @@
+/** The CMS's Category dropdown — fixed set, matches the homepage's
+ * WorkGallery groupings. */
+export const PROJECT_CATEGORIES = [
+  "SaaS & Web Apps",
+  "Marketplace",
+  "AI Products",
+  "Automation",
+  "Internal Tools",
+  "MVP",
+] as const;
+export type ProjectCategory = (typeof PROJECT_CATEGORIES)[number];
+
 export type Project = {
   slug: string;
   title: string;
   description: string;
   coverImage: string;
+  /** Picked separately in the CMS for the homepage's "Our Work" gallery
+   * tiles — falls back to `coverImage` when unset, since most projects
+   * don't need a dedicated index image. */
+  indexThumbnail?: string;
   showcaseImages: string[]; // alternate images shown on hover
   tags: string[];
   badge?: string; // e.g. "Coming Soon"
+  /** Zero or more — a project can belong to several categories at once
+   * (e.g. both "SaaS & Web Apps" and "Automation"). */
+  categories: ProjectCategory[];
 };
 
 export type ProjectImageRef = { src: string; alt: string };

@@ -62,18 +62,21 @@ export default function MarketplaceDevelopmentPage() {
                 description:
                   "Unlike single-sided apps, marketplace development done right treats buyer and seller experiences as one interdependent system.",
                 previewLabel: "Buyer/seller flow map",
+                previewImage: { src: "/prismatic-icons/v2-mp-1.png", alt: "Buyer/seller flow map" },
               },
               {
                 title: "Payments & Trust Built In",
                 description:
                   "One of the key advantages of working with us is escrow, split payments, and verification handled correctly from day one.",
                 previewLabel: "Escrow payment flow",
+                previewImage: { src: "/prismatic-icons/v2-mp-2.png", alt: "Escrow payment flow" },
               },
               {
                 title: "Matching Tuned for Liquidity",
                 description:
                   "As your platform grows, structure matters. Our marketplace development approach tunes search and discovery for real liquidity, not just search.",
                 previewLabel: "Search/discovery ranking",
+                previewImage: { src: "/prismatic-icons/v2-mp-3.png", alt: "Search/discovery ranking" },
               },
             ]}
           />
@@ -84,18 +87,18 @@ export default function MarketplaceDevelopmentPage() {
               {
                 label: "Marketplace Strategy & Flow Mapping",
                 description: "We define buyer, seller, and admin flows before writing a single line of code.",
-                image: { src: "/services/mp-mapping.png", alt: "Buyer-side user flow — checkout, product details, and payment steps" },
+                image: { src: "/services/mpmapping.png", alt: "Buyer-side user flow — checkout, product details, and payment steps" },
               },
               {
                 label: "Platform Development",
                 description: "We build listings, search, messaging, and transaction flows as one connected system.",
-                image: { src: "/services/full-stack-dev.png", alt: "Full-stack app editor — listings, search, and messaging in one interface" },
+                image: { src: "/services/fullstack.png", alt: "Full-stack app editor — listings, search, and messaging in one interface" },
               },
               {
                 label: "Payments & Trust Integration",
                 description: "We integrate payment processing, escrow, and verification the right way, the first time.",
                 image: {
-                  src: "/services/integrations.png",
+                  src: "/services/integration.png",
                   alt: "Integrations panel — payment processing and verification connected to your marketplace",
                 },
               },
@@ -103,7 +106,7 @@ export default function MarketplaceDevelopmentPage() {
                 label: "Growth & Liquidity Optimization",
                 description:
                   "As your business grows, we continuously refine matching and discovery to keep both sides transacting.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />
@@ -121,7 +124,7 @@ export default function MarketplaceDevelopmentPage() {
                 // shot, a better match for a marketplace's buyer-side
                 // transaction step than the generic scoping-checklist
                 // default — on request.
-                image: { src: "/process/process-4.png", alt: "Marketplace checkout flow" },
+                image: { src: "/process/process-d.png", alt: "Marketplace checkout flow" },
               },
               {
                 title: "Build & Payment Integration",

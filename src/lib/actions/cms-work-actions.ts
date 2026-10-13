@@ -7,14 +7,25 @@ import { slugify } from "@/lib/cms/slugify";
 import {
   deleteWorkProjectRow,
   insertWorkProject,
+  setWorkProjectVisibility,
   updateWorkProjectRow,
   type NewWorkProjectInput,
 } from "@/lib/data/cms-work-projects";
-import type { ProjectImageRef, ProjectTestimonial } from "@/types/work";
+import { PROJECT_CATEGORIES, type ProjectImageRef, type ProjectTestimonial } from "@/types/work";
 
 export async function deleteWorkProject(slug: string): Promise<void> {
   await requireSession();
   await deleteWorkProjectRow(slug);
+  revalidatePath("/cms/work");
+  revalidatePath("/work");
+  revalidatePath("/work/grid-alt");
+  revalidatePath(`/work/${slug}`);
+}
+
+/** Backs the Work CMS list's quick show/hide toggle. */
+export async function toggleWorkProjectVisibility(slug: string, isVisible: boolean): Promise<void> {
+  await requireSession();
+  await setWorkProjectVisibility(slug, isVisible);
   revalidatePath("/cms/work");
   revalidatePath("/work");
   revalidatePath("/work/grid-alt");
@@ -33,6 +44,10 @@ function validateWorkFields(formData: FormData): string | null {
   if (!String(formData.get("detailTitle") ?? "").trim()) return "Detail title is required.";
   if (!String(formData.get("detailDescription") ?? "").trim()) return "Detail description is required.";
   if (!String(formData.get("coverImage") ?? "").trim()) return "Cover image is required.";
+  const categories = formData.getAll("categories").map(String);
+  if (categories.some((c) => !PROJECT_CATEGORIES.includes(c as (typeof PROJECT_CATEGORIES)[number]))) {
+    return "Category must be one of the listed options.";
+  }
   return null;
 }
 
@@ -42,6 +57,8 @@ function readWorkFormFields(formData: FormData, title: string): Omit<NewWorkProj
     .map((t) => t.trim())
     .filter(Boolean);
   const badge = String(formData.get("badge") ?? "").trim();
+  const categories = formData.getAll("categories").map(String);
+  const indexThumbnail = String(formData.get("indexThumbnail") ?? "").trim();
 
   const hasTestimonial = formData.get("hasTestimonial") === "on";
   const testimonial: ProjectTestimonial | null = hasTestimonial
@@ -57,9 +74,16 @@ function readWorkFormFields(formData: FormData, title: string): Omit<NewWorkProj
     title,
     description: String(formData.get("description") ?? ""),
     coverImage: String(formData.get("coverImage") ?? ""),
+    indexThumbnail: indexThumbnail || null,
     showcaseImages: JSON.parse(String(formData.get("showcaseImagesJson") ?? "[]")) as string[],
     tags,
     badge: badge || null,
+    categories,
+    // A checkbox is absent from FormData entirely when unchecked (no
+    // "off" value to read) — the form checks it by default for a new
+    // project, so this only reads false when a human explicitly
+    // unchecked it.
+    isVisible: formData.get("isVisible") === "on",
     sortOrder: Number(formData.get("sortOrder") ?? 0),
     detailTitle: String(formData.get("detailTitle") ?? ""),
     detailDescription: String(formData.get("detailDescription") ?? ""),

@@ -17,11 +17,12 @@ type ScrollDriverState = {
   activeProject: number;
   overLightWork: boolean;
   /** General "is nav currently over a light-background section" — true while
-   * `overLightWork` is true (preserves the homepage's tuned pin-section timing
-   * exactly), OR while any `[data-nav-bg="light"]` element spans the nav's
-   * vertical position. Nav uses this (not `overLightWork` directly) so the
-   * same light/dark text logic works on any page, not just the homepage's
-   * pinned work gallery. */
+   * any `[data-nav-bg="light"]` element spans the nav's vertical position.
+   * `overLightWork` itself no longer forces this: the pinned work gallery
+   * used to have a white background (hence the name), but now has a dark
+   * navy one (#0B3E91, see WorkGallery.tsx), so nav correctly falls back to
+   * its dark-background (white text) treatment while pinned over it,
+   * matching every other dark section on the page. */
   navOnLight: boolean;
   /** True while the page is still scrolled within the hero section (top <
    * one viewport height) — Nav uses this to hide its own pill/CTA chrome
@@ -92,7 +93,16 @@ export function fadeStyle(
   };
 }
 
-export function ScrollDriverProvider({ children }: { children: ReactNode }) {
+export function ScrollDriverProvider({
+  children,
+  workBgHex,
+}: {
+  children: ReactNode;
+  /** Overrides the default #0B3E91 target the fixed hero/CTA background
+   * gradients settle to — pass the page's actual WorkGallery `bgHex` so
+   * the two stay in sync (e.g. home-playground's experiment). */
+  workBgHex?: string;
+}) {
   const heroBgElRef = useRef<HTMLDivElement | null>(null);
   const glHostElRef = useRef<HTMLDivElement | null>(null);
   const pinElRef = useRef<HTMLDivElement | null>(null);
@@ -102,6 +112,10 @@ export function ScrollDriverProvider({ children }: { children: ReactNode }) {
   const footerElRef = useRef<HTMLDivElement | null>(null);
   const projectCountRef = useRef(0);
   const reduceMotionRef = useRef(false);
+  const workBgHexRef = useRef(workBgHex);
+  useEffect(() => {
+    workBgHexRef.current = workBgHex;
+  }, [workBgHex]);
 
   const [state, setState] = useState<ScrollDriverState>({
     activeProject: -1,
@@ -150,7 +164,7 @@ export function ScrollDriverProvider({ children }: { children: ReactNode }) {
       if (heroBgElRef.current) {
         const p = Math.max(0, Math.min(1, top / vh));
         const pBg = Math.max(0, Math.min(1, top / (vh * 0.62)));
-        let bg = heroBgGradient(pBg);
+        let bg = heroBgGradient(pBg, workBgHexRef.current);
         let glOpacity = Math.max(0, 1 - p * 1.6);
         let glTransform = `translate3d(0, ${(-top * 0.55).toFixed(1)}px, 0)`;
 
@@ -204,7 +218,7 @@ export function ScrollDriverProvider({ children }: { children: ReactNode }) {
           const q = Math.min(qEnter, qExit);
 
           if (q > 0) {
-            bg = ctaBgGradient(q);
+            bg = ctaBgGradient(q, workBgHexRef.current);
             logoMode = "cta";
             glOpacity = q;
             glTransform = "translate3d(0,0,0)";
@@ -241,20 +255,19 @@ export function ScrollDriverProvider({ children }: { children: ReactNode }) {
         if (overLightWork) active = Math.round(progress * (n - 1));
       }
 
-      // nav text/logo contrast — generalizes overLightWork beyond the pinned
-      // work gallery so any page can mark a section [data-nav-bg="light"] and
-      // get the same "dark text/logo over light backgrounds" behavior. Probe
-      // near the nav's own vertical center (it's an 80px/68px bar pinned at
-      // top:0) rather than mid-viewport, so this reflects what's actually
-      // behind the nav bar itself.
-      let navOnLight = overLightWork;
-      if (!navOnLight) {
-        const probeY = 40;
-        document.querySelectorAll<HTMLElement>('[data-nav-bg="light"]').forEach((el) => {
-          const r = el.getBoundingClientRect();
-          if (r.top <= probeY && r.bottom > probeY) navOnLight = true;
-        });
-      }
+      // nav text/logo contrast — any section can mark itself
+      // [data-nav-bg="light"] to get "dark text/logo over light
+      // backgrounds" behavior. Probe near the nav's own vertical center
+      // (it's an 80px/68px bar pinned at top:0) rather than mid-viewport,
+      // so this reflects what's actually behind the nav bar itself. The
+      // pinned work gallery is dark (#0B3E91) and intentionally doesn't
+      // mark itself light, so nav keeps its white-text treatment there.
+      let navOnLight = false;
+      const probeY = 40;
+      document.querySelectorAll<HTMLElement>('[data-nav-bg="light"]').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        if (r.top <= probeY && r.bottom > probeY) navOnLight = true;
+      });
 
       const atHero = top < vh;
 

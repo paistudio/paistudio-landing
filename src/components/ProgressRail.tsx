@@ -28,7 +28,7 @@ export function ProgressRail() {
               style={{
                 width: on ? 22 : 7,
                 height: 7,
-                background: on ? "#374a3e" : "rgba(26,24,19,0.22)",
+                background: on ? "#ffffff" : "rgba(255,255,255,0.32)",
               }}
             />
           </button>

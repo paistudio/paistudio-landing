@@ -64,18 +64,21 @@ export default function AutomationToolsPage() {
                 description:
                   "Unlike agencies locked into one tool, automation tools done right start with your requirements, not a preferred platform.",
                 previewLabel: "Platform comparison matrix",
+                previewImage: { src: "/prismatic-icons/v2-automation-1.png", alt: "Platform comparison matrix" },
               },
               {
                 title: "Complex Logic Handled Properly",
                 description:
                   "One of the key advantages of working with us is conditional branching, error handling, and retries built correctly — not left to default behavior.",
                 previewLabel: "Branching workflow diagram",
+                previewImage: { src: "/prismatic-icons/v2-automation-2.png", alt: "Branching workflow diagram" },
               },
               {
                 title: "Maintainable by Design",
                 description:
                   "As your operations grow, structure matters. Our automation tools approach is documented and modular, so a future team member can actually understand it.",
                 previewLabel: "Documented workflow map",
+                previewImage: { src: "/prismatic-icons/v2-automation-3.png", alt: "Documented workflow map" },
               },
             ]}
           />
@@ -86,7 +89,7 @@ export default function AutomationToolsPage() {
               {
                 label: "Automation Audit",
                 description: "We identify which manual processes are actually worth automating.",
-                image: { src: "/services/mp-mapping.png", alt: "Process flow map — ordered steps in a current workflow" },
+                image: { src: "/services/mpmapping.png", alt: "Process flow map — ordered steps in a current workflow" },
               },
               {
                 label: "Platform Selection & Architecture",
@@ -101,7 +104,7 @@ export default function AutomationToolsPage() {
               {
                 label: "Monitoring & Refinement",
                 description: "We monitor for failures and refine your workflows as your processes change.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />
@@ -118,7 +121,7 @@ export default function AutomationToolsPage() {
                 // (process-1.png) with process-5.png — an opportunity/
                 // impact ranking view, a better match for an audit step
                 // than the generic scoping-checklist default — on request.
-                image: { src: "/process/process-5.png", alt: "Automation opportunity ranking by impact" },
+                image: { src: "/process/process-3.png", alt: "Automation opportunity ranking by impact" },
               },
               {
                 title: "Platform & Architecture Design",

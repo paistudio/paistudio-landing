@@ -25,15 +25,8 @@ export type BlogPostRow = {
   body: ArticleBlock[];
 };
 
-const dateFormatter = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" });
-
-/** `published_at` (a real DATE column) → the same "Jul 28, 2026" display
- * string the old static data hardcoded — formatted here instead of stored,
- * so there's one source of truth instead of a date + a hand-written label
- * that could drift apart. */
-export function formatPublishedDate(value: string | Date): string {
-  return dateFormatter.format(new Date(value));
-}
+export { formatPublishedDate } from "@/lib/format-published-date";
+import { formatPublishedDate } from "@/lib/format-published-date";
 
 function rowToAuthor(row: BlogPostRow): BlogPostAuthor {
   return { name: row.author_name, role: row.author_role, hue: row.author_hue };

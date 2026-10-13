@@ -89,17 +89,17 @@ export default function LovablePage() {
               {
                 label: "AI-Assisted Scaffolding",
                 description: "We generate your initial application structure using Lovable.",
-                image: { src: "/services/lovable.png", alt: "Lovable app editor — generated layout and components" },
+                image: { src: "/services/tool-lovable.png", alt: "Lovable app editor — generated layout and components" },
               },
               {
                 label: "Human Review & Hardening",
                 description: "We review, refactor, and harden the generated code for real use.",
-                image: { src: "/services/mp-mapping.png", alt: "Structured review flow — ordered checks from step to step" },
+                image: { src: "/services/mpmapping.png", alt: "Structured review flow — ordered checks from step to step" },
               },
               {
                 label: "Extension & Production Readiness",
                 description: "We extend features and prepare your app for real users.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />

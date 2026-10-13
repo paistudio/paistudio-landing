@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { Marquee } from "@/components/Marquee";
 
 type TrustBadge = {
@@ -147,9 +150,21 @@ function HeroCardContent({ card }: { card: HeroCard }) {
  * width. Same `rounded-[32px]` + `object-cover` treatment as every other
  * image box in this project. */
 function HeroMarqueeTile({ src, alt }: HeroImage) {
+  const [aspectRatio, setAspectRatio] = useState(16 / 10);
   return (
-    <div className="relative h-full shrink-0 overflow-hidden rounded-[32px] bg-[#d9d7d0]" style={{ aspectRatio: "16 / 10" }}>
-      <Image src={src} alt={alt} fill className="object-cover" />
+    <div className="relative h-full shrink-0 overflow-hidden rounded-[16px] bg-[#d9d7d0]" style={{ aspectRatio }}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover"
+        onLoad={(e) => {
+          const img = e.currentTarget;
+          if (img.naturalWidth && img.naturalHeight) {
+            setAspectRatio(img.naturalWidth / img.naturalHeight);
+          }
+        }}
+      />
     </div>
   );
 }

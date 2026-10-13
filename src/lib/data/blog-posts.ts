@@ -1,25 +1,7 @@
 import type { BlogPost } from "@/types/blog";
 import { rowToBlogPost, sql, type BlogPostRow } from "./blog-db";
 
-// Static — the category taxonomy itself isn't "content" in the sense the
-// Postgres migration was for (blog posts), it's fixed UI structure the
-// filter tabs render. Posts themselves now live in the blog_posts table
-// (see blog-db.ts / scripts/setup-blog-db.mjs).
-// "Guides", "Business", "Bubble Development", and "Development" added for
-// migrated posts (see scripts/migrate-*.mjs) — the real categories each
-// source page itself uses, not from the 5 categories this taxonomy
-// originally shipped with.
-export const BLOG_CATEGORIES = [
-  "All",
-  "Product Strategy",
-  "No-Code & AI",
-  "Case Studies",
-  "Founder Stories",
-  "Guides",
-  "Business",
-  "Bubble Development",
-  "Development",
-];
+export { BLOG_CATEGORIES } from "@/lib/blog-categories";
 
 export async function getFeaturedPost(): Promise<BlogPost | null> {
   // ORDER BY is belt-and-suspenders: cms-blog-posts.ts's insert/update

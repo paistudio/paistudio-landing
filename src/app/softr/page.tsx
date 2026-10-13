@@ -93,12 +93,12 @@ export default function SoftrPage() {
               {
                 label: "Integration & Automation",
                 description: "We connect Softr to your other tools and automate data flow.",
-                image: { src: "/services/integrations.png", alt: "Integrations panel connecting Softr to your other tools" },
+                image: { src: "/services/integration.png", alt: "Integrations panel connecting Softr to your other tools" },
               },
               {
                 label: "Refinement & Expansion",
                 description: "We extend your portal as user needs grow.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />

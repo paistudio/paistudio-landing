@@ -60,17 +60,20 @@ export default function MvpDevelopmentPage() {
                 title: "Scope Discipline",
                 description: "Unlike open-ended builds, MVP development done right defines what NOT to build first.",
                 previewLabel: "Scope cut list",
+                previewImage: { src: "/prismatic-icons/v2-mvp-1.png", alt: "Scope cut list" },
               },
               {
                 title: "Right-Sized Tooling",
                 description:
                   "One of the key advantages of working with us is choosing whichever tool gets you a real test the fastest — no-code, low-code, or full-code.",
                 previewLabel: "Tooling decision matrix",
+                previewImage: { src: "/prismatic-icons/v2-mvp-2.png", alt: "Tooling decision matrix" },
               },
               {
                 title: "Built to Extend",
                 description: "As your idea gets validated, structure matters. Our MVP development approach means a \"yes\" doesn't mean starting over.",
                 previewLabel: "Post-validation roadmap",
+                previewImage: { src: "/prismatic-icons/v2-mvp-3.png", alt: "Post-validation roadmap" },
               },
             ]}
           />
@@ -86,17 +89,17 @@ export default function MvpDevelopmentPage() {
               {
                 label: "Rapid Build",
                 description: "We build your MVP using the fastest appropriate stack for your validation goal.",
-                image: { src: "/services/full-stack-dev.png", alt: "Full-stack app editor — data, workflows, and pages in one interface" },
+                image: { src: "/services/fullstack.png", alt: "Full-stack app editor — data, workflows, and pages in one interface" },
               },
               {
                 label: "Launch & Data Instrumentation",
                 description: "We ship with analytics in place so you actually learn from real usage.",
-                image: { src: "/services/integrations.png", alt: "Integrations panel — analytics wired into your product" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
               {
                 label: "Post-Validation Roadmapping",
                 description: "We turn validated learnings into a real product roadmap.",
-                image: { src: "/services/scale.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
+                image: { src: "/services/scales.png", alt: "System health dashboard — workflows, API calls, database size, and error rate" },
               },
             ]}
           />
