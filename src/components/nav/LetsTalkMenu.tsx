@@ -91,25 +91,39 @@ export function LetsTalkMenu({ variant, align, navOnLight = false, chromeVariant
   // navbar"), matching Nav.tsx's own borderless pill/hamburger. The
   // `footer` branch is untouched (that variant isn't "the navbar" — see
   // this component's own `navOnLight` doc comment) and keeps its border.
-  const navAtHero = variant === "nav" && atHero;
+  //
+  // Over a light (white) page section, this CTA goes solid `bg-ink`
+  // instead of light glass — on request ("ketika background halaman warna
+  // putih, ... warna cta ganti jadi deep blue", corrected one message
+  // later to "not deep [blue], but ink"), mirroring Nav.tsx's own
+  // pill. That makes the trigger a *dark* surface in both `navOnLight`
+  // states now, so its hover/label both collapse to the same dark-chrome
+  // values the dark-glass branch already used instead of the old
+  // gray-700-on-near-transparent pairing.
+  // `!navOnLight` only — see Nav.tsx's matching `pillChromeClass` comment
+  // for why: `atHero` is a pure scroll-position heuristic that fires just
+  // as much on a light-hero page (e.g. /work), where a transparent CTA
+  // would read as invisible white-on-white now that its label is always
+  // `text-white`.
+  const navAtHero = variant === "nav" && atHero && !navOnLight;
   const triggerClass = navAtHero
     ? isGreyChrome
       ? greyChromeOnLight
-        ? "bg-transparent hover:bg-ink/16"
+        ? "bg-transparent hover:bg-ink/90"
         : "bg-transparent hover:bg-white/20"
       : isLightNav
-        ? "bg-transparent hover:bg-ink/10"
+        ? "bg-transparent hover:bg-ink/90"
         : "bg-transparent hover:bg-white/16"
     : variant === "nav"
       ? isGreyChrome
         ? greyChromeOnLight
-          ? "bg-ink/10 hover:bg-ink/16"
+          ? "bg-ink hover:bg-ink/90"
           : "bg-white/12 hover:bg-white/20"
         : isLightNav
-          ? "bg-ink/5 shadow-[0_6px_24px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)] hover:bg-ink/10"
+          ? "bg-ink shadow-[0_6px_24px_rgba(255,255,255,0.14),inset_0_1px_0_rgba(255,255,255,0.18)] hover:bg-ink/90"
           : "bg-white/8 shadow-[0_6px_24px_rgba(255,255,255,0.14),inset_0_1px_0_rgba(255,255,255,0.18)] hover:bg-white/16"
       : "border border-white/30 bg-white/12 shadow-[0_6px_24px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.22)] hover:bg-white/20";
-  const labelClass = variant === "nav" ? (isLightNav || greyChromeOnLight ? "text-gray-700" : "text-white") : "text-white";
+  const labelClass = "text-white";
   const panelClass = isLightNav
     ? "border-ink/10 bg-white/95 shadow-[0_18px_48px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.6)]"
     : "border-white/14 bg-[#121210f2] shadow-[0_18px_48px_rgba(0,0,0,0.34),inset_0_1px_0_rgba(255,255,255,0.12)]";

@@ -67,36 +67,56 @@ export function Nav({ theme = "dark", chromeVariant = "v1" }: NavProps) {
   // sections and light-glass/dark-text over light ones, mirroring v1's own
   // `isLightChrome` split below.
   const greyChromeOnLight = isGreyChrome && navOnLight;
-  const textColorClass = isLightChrome || greyChromeOnLight ? "text-gray-700" : "text-white/82";
-  const hamburgerTextClass = isLightChrome || greyChromeOnLight ? "text-gray-700" : "text-white";
+  // Over a light (white) page section, the pill/hamburger/CTA go solid
+  // `bg-ink` instead of light glass — on request ("ketika background
+  // halaman warna putih, nav-link container dan warna cta ganti jadi deep
+  // blue", corrected one message later to "not deep [blue], but ink"). That
+  // makes the pill a *dark* surface in both states now (solid black vs.
+  // the existing translucent-dark glass), so text/hover treatment
+  // collapses to one dark-chrome-style value instead of branching per
+  // light/dark — a solid black fill needs the same near-white text and
+  // white-overlay hover a dark glass pill already used, not the old
+  // gray-700-on-near-transparent pairing (too low-contrast against a solid
+  // dark fill).
+  const textColorClass = "text-white/82";
+  const hamburgerTextClass = "text-white";
 
   // No `border-*` color in any branch — the pill/hamburger border was
   // removed entirely on request ("hapus border di navbar"), so these are
   // background-only now (no shadow either — removed on request).
   const chromeClass = isGreyChrome
     ? greyChromeOnLight
-      ? "bg-ink/10"
+      ? "bg-ink"
       : "bg-white/12"
     : isLightChrome
-      ? "bg-ink/5 shadow-[0_6px_24px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)]"
+      ? "bg-ink shadow-[0_6px_24px_rgba(255,255,255,0.14),inset_0_1px_0_rgba(255,255,255,0.18)]"
       : "bg-white/8 shadow-[0_6px_24px_rgba(255,255,255,0.14),inset_0_1px_0_rgba(255,255,255,0.18)]";
   const pillLinkHoverClass = isGreyChrome
     ? greyChromeOnLight
-      ? "hover:bg-ink/16"
+      ? "hover:bg-ink/90"
       : "hover:bg-white/20"
     : isLightChrome
-      ? "hover:bg-ink/10"
+      ? "hover:bg-ink/90"
       : "hover:bg-white/14";
-  const hamburgerChromeClass = isGreyChrome ? (greyChromeOnLight ? "bg-ink/10" : "bg-white/12") : isLightChrome ? "bg-ink/5" : "bg-white/8";
+  const hamburgerChromeClass = isGreyChrome ? (greyChromeOnLight ? "bg-ink" : "bg-white/12") : isLightChrome ? "bg-ink" : "bg-white/8";
   // Still within the hero (top < one viewport — see `atHero`'s own comment
   // in useScrollDriver.tsx): drop the pill/hamburger's own background
   // entirely (on request — "saat scroll sampai di hero, sembunyikan
   // background color navbar dan si button lets talk") so the links sit
   // directly on the hero's own dark background instead of inside a visible
-  // pill. Text color is untouched — it already tracks `navOnLight`/
-  // `isLightChrome` regardless of this, so it stays legible either way.
-  const pillChromeClass = atHero ? "bg-transparent" : chromeClass;
-  const hamburgerBgClass = atHero ? "bg-transparent" : hamburgerChromeClass;
+  // pill. Only while `!navOnLight` though — `atHero` is a pure
+  // scroll-position heuristic (top < one viewport) tuned for the
+  // homepage's dark hero; it fires just as much on a page whose hero is
+  // light (e.g. /work's white `bg-paper` hero, `navOnLight = true`
+  // throughout). Text there is unconditionally `text-white/82` now (see
+  // `textColorClass` above), so a transparent pill over a light hero would
+  // read as invisible white-on-white instead of "legible either way" —
+  // restricting this to the dark-hero case keeps the original homepage
+  // behavior while fixing that on any light-hero page ("di halaman our
+  // work ketika masuk ke hero section, navbar containernya kenapa engga
+  // ink?").
+  const pillChromeClass = atHero && !navOnLight ? "bg-transparent" : chromeClass;
+  const hamburgerBgClass = atHero && !navOnLight ? "bg-transparent" : hamburgerChromeClass;
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-40 h-20 max-[560px]:h-[68px]">

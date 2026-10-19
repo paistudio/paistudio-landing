@@ -62,18 +62,21 @@ export default function LovablePage() {
                 description:
                   "Unlike manual scaffolding, Lovable development done right gets you from prompt to functioning full-stack app in hours.",
                 previewLabel: "Generated app scaffold",
+                previewImage: { src: "/prismatic-icons/v2-lovable-1.png", alt: "Generated app scaffold" },
               },
               {
                 title: "Real Codebase, Not a Black Box",
                 description:
                   "One of the key advantages of working with us is generated code that's standard and exportable, not locked to a proprietary runtime.",
                 previewLabel: "Exportable source tree",
+                previewImage: { src: "/prismatic-icons/v2-lovable-2.png", alt: "Exportable source tree" },
               },
               {
                 title: "Human-Refined Output",
                 description:
                   "As your product moves toward launch, structure matters. Our Lovable development approach treats AI-generated scaffolding as a starting point, then reviews and hardens it.",
                 previewLabel: "Code review diff",
+                previewImage: { src: "/prismatic-icons/v2-lovable-3.png", alt: "Code review diff" },
               },
             ]}
           />

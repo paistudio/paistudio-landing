@@ -70,9 +70,13 @@ sub-links, grouped into 1 or more labeled columns.
 ## Visual Specs
 - Trigger: `inline-flex items-center gap-1.5`, `rounded-full px-[18px]
   py-2`; chevron SVG (9×9, `opacity-60`) that does not currently rotate
-  on open (static icon). Hover: `bg-white/14` (`!isLightChrome &&
-  !isDarkOnLight`) / `bg-ink/10` (`isLightChrome`) / `bg-ink/75`
-  (`isDarkOnLight` — `chromeVariant="v2"` + `navOnLight`).
+  on open (static icon). Hover: `bg-white/14` (default dark case) /
+  `bg-ink/90` (`isLightChrome` or `greyChromeOnLight` —
+  `chromeVariant="v2"` + `navOnLight`, named `isDarkOnLight` in an
+  earlier pass) — both light-background cases now hover the same
+  near-black tint, since the trigger itself inherits the parent pill's
+  now-unconditional `bg-ink` fill rather than a light-glass one (see
+  `Nav-docs.md`'s Behavior section).
 - Panel: `absolute left-1/2 top-full`, offset via `translate(-50%, 0 | 8px)`,
   `pt-3.5` gap from trigger, 200ms opacity/transform transition.
 - Panel surface: `rounded-[32px]`, `backdrop-blur-2xl backdrop-saturate-150`,

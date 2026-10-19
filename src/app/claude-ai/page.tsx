@@ -63,18 +63,21 @@ export default function ClaudeAiPage() {
                 description:
                   "Unlike generic AI widgets, Claude AI integration done right is well suited to structured tasks that require careful, literal instruction following.",
                 previewLabel: "Structured task output",
+                previewImage: { src: "/prismatic-icons/v2-claude-1.png", alt: "Structured task output" },
               },
               {
                 title: "Long-Context Handling",
                 description:
                   "One of the key advantages of working with us is support for large amounts of context — ideal for document- and codebase-heavy use cases.",
                 previewLabel: "Document context window",
+                previewImage: { src: "/prismatic-icons/v2-claude-2.png", alt: "Document context window" },
               },
               {
                 title: "Tool Use & Agentic Workflows",
                 description:
                   "As your product's needs grow, structure matters. Our Claude AI integration approach supports function calling and multi-step agentic task execution.",
                 previewLabel: "Tool-call execution trace",
+                previewImage: { src: "/prismatic-icons/v2-claude-3.png", alt: "Tool-call execution trace" },
               },
             ]}
           />
@@ -118,12 +121,6 @@ export default function ClaudeAiPage() {
                 title: "Pipeline Design & Build",
                 description:
                   "We design and implement prompting, context, and tool-use architecture, tested against a structured evaluation set.",
-                // Overrides ProcessSection's default step-2 image
-                // (process-2.png) with process-7.png — a connected
-                // pipeline-stages diagram, a closer match for "pipeline
-                // design" than the generic design/dev/AI default — on
-                // request.
-                image: { src: "/process/process-7.png", alt: "Connected pipeline stages — design, development, AI services, integration" },
               },
               {
                 title: "Launch & Monitor",

@@ -78,13 +78,19 @@ fixed:
   section, light logo otherwise. **No transition** — the swap is instant
   (deliberately: the navbar itself carries no animation of its own, see
   `docs/animation-specs.md`'s scope note; only page *content* animates).
-- Center pill text (`text-text/82` vs `text-white/82`) and the hamburger
-  icon color (`text-text` vs `text-white`) follow the same `navOnLight`
-  value, also with no transition — an instant snap, not a fade.
-- Pill/hamburger chrome (background, border, shadow) also follows
-  `navOnLight`: light-glass (`border-ink/12 bg-ink/5`) when `navOnLight`,
-  dark-glass (`border-white/16 bg-white/8`) otherwise — see Visual Specs
-  for the full class strings. Also an instant snap, no transition.
+- Center pill text is `text-white/82` and the hamburger icon is
+  `text-white` **regardless** of `navOnLight` now — both chrome states
+  are a dark surface (see below), so there's no longer a light/dark text
+  branch to flip; was `text-text/82`/`text-white/82` before the pill's
+  `navOnLight` case switched from light glass to solid `bg-ink` (on
+  request — "ketika background halaman warna putih, nav-link container
+  dan warna cta ganti jadi deep blue", corrected one message later to
+  "not deep [blue], but ink").
+- Pill/hamburger chrome (background, shadow — no border, see Visual
+  Specs) follows `navOnLight`: solid `bg-ink` (black) when
+  `navOnLight`, translucent dark glass (`bg-white/8`) otherwise — see
+  Visual Specs for the full class strings. Also an instant snap, no
+  transition.
 - `MegaMenu`'s trigger text is `text-current` — it inherits the pill's
   color automatically, no separate wiring needed — but its panel/hover
   chrome doesn't live inside the pill, so `Nav` passes it `navOnLight`
@@ -135,17 +141,18 @@ as a static per-page choice.
 - Center pill: `absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2`,
   `rounded-full`, `p-[5px]`, `backdrop-blur-lg backdrop-saturate-150`,
   14px text. Each link/trigger: `rounded-full px-[18px] py-2`.
-  - Chrome, `navOnLight`: `bg-ink/5`, `border-ink/12`, hover → `bg-ink/10`,
-    softer shadow
-    `shadow-[0_6px_24px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)]`.
-  - Chrome, `!navOnLight`: `bg-white/8`, `border-white/16`, hover →
-    `bg-white/14`, shadow `shadow-[0_6px_24px_rgba(255,255,255,0.14),inset_0_1px_0_rgba(255,255,255,0.18)]`.
-  - Text: `text-text/82` when `navOnLight`, `text-white/82` otherwise —
-    same condition as chrome, so both always flip together.
+  - Chrome, `navOnLight`: solid `bg-ink`, hover → `bg-ink/90`, shadow
+    `shadow-[0_6px_24px_rgba(255,255,255,0.14),inset_0_1px_0_rgba(255,255,255,0.18)]`
+    (same shadow as the `!navOnLight` case — both are dark-fill pills now,
+    just a different hue).
+  - Chrome, `!navOnLight`: `bg-white/8`, hover → `bg-white/14`, shadow
+    `shadow-[0_6px_24px_rgba(255,255,255,0.14),inset_0_1px_0_rgba(255,255,255,0.18)]`.
+  - Text: `text-white/82` always — no longer conditional on `navOnLight`
+    (both chrome states are a dark fill now, so the same near-white text
+    reads fine on either).
 - Hamburger button: chrome flips with `navOnLight` the same way as the
-  pill (`border-ink/12 bg-ink/5` when `navOnLight` / `border-white/16
-  bg-white/8` otherwise); icon color `text-text` / `text-white`, same
-  condition.
+  pill (`bg-ink` when `navOnLight` / `bg-white/8` otherwise); icon color
+  is `text-white` always, not conditional.
 
 ## Responsive Behavior
 - **≤900px:** center link pill (`Our Work`/`Build`/`Pricing`/`Resources`)

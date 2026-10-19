@@ -61,18 +61,21 @@ export default function SoftrPage() {
                 description:
                   "Unlike full custom builds, Softr development done right ships a polished interface on your existing data in days, not months.",
                 previewLabel: "Portal launch timeline",
+                previewImage: { src: "/prismatic-icons/v2-softr-1.png", alt: "Portal launch timeline" },
               },
               {
                 title: "Native Airtable & Sheets Integration",
                 description:
                   "One of the key advantages of working with us is building directly on data you likely already have — no migration required.",
                 previewLabel: "Connected data source",
+                previewImage: { src: "/prismatic-icons/v2-softr-2.png", alt: "Connected data source" },
               },
               {
                 title: "Built-In Access Control",
                 description:
                   "As your user base grows, structure matters. Our Softr development approach handles permissions and gated content natively.",
                 previewLabel: "Permission level list",
+                previewImage: { src: "/prismatic-icons/v2-softr-3.png", alt: "Permission level list" },
               },
             ]}
           />

@@ -57,22 +57,26 @@ real links).
   `bg-white/8`, `py-2 pr-4 pl-2`,
   `shadow-[0_6px_24px_rgba(255,255,255,0.14),inset_0_1px_0_rgba(255,255,255,0.18)]`,
   `backdrop-blur-lg backdrop-saturate-150`, hover → `bg-white/16`.
-- Trigger (`nav` variant, `isLightNav`): `border-ink/12`,
-  `bg-ink/5`, `shadow-[0_6px_24px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)]`,
-  hover → `bg-ink/10`.
-- Trigger (`nav` variant, `isDarkOnLight` — `chromeVariant="v2"` +
-  `navOnLight`): `border-white/12`, `bg-ink/90`,
-  `shadow-[0_6px_24px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.14)]`,
-  hover → `bg-white/16` (same hover value as the default dark trigger —
-  just a white-tint overlay, works fine on any dark base).
+- Trigger (`nav` variant, `isLightNav`): solid `bg-ink`,
+  `shadow-[0_6px_24px_rgba(255,255,255,0.14),inset_0_1px_0_rgba(255,255,255,0.18)]`
+  (same shadow as the default dark trigger), hover → `bg-ink/90` — was
+  light glass (`bg-ink/5`), changed to solid black on request ("ketika
+  background halaman warna putih, ... warna cta ganti jadi deep blue",
+  corrected one message later to "not deep [blue], but ink").
+- Trigger (`nav` variant, `greyChromeOnLight` — `chromeVariant="v2"` +
+  `navOnLight`, named `isDarkOnLight` in an earlier pass): solid
+  `bg-ink` (no shadow), hover → `bg-ink/90` — now the same value as the
+  `isLightNav` branch above, not a separate near-opaque black
+  (`bg-ink/90`).
 - Trigger (`footer` variant): same shape as the dark nav trigger but
   brighter surface (`border-white/30`, `bg-white/12`), `pr-5`, hover →
   `bg-white/20`, label is `font-medium` — **unaffected by `navOnLight`/
   `chromeVariant`**.
-- Label color, `nav` variant: `text-text` when `isLightNav`, `text-white`
-  otherwise (covers both the default dark case and `isDarkOnLight` — both
-  want white label text, so no third branch needed here, only for
-  chrome). Label color, `footer` variant: always `text-white`.
+- Label color, `nav` variant: always `text-white`, not conditional on
+  `isLightNav`/`greyChromeOnLight` at all anymore — every trigger state
+  is a dark fill now (`bg-ink` or dark glass, see Visual Specs above),
+  so there's no light-background case left needing dark label text.
+  Label color, `footer` variant: always `text-white` (unchanged).
 - Avatar: 32×32px circle, `object-cover` (same for all variants/states).
 - Panel: `w-[212px]`, `rounded-[32px]`, `p-3.5`, same blur treatment as
   `MegaMenu`. Each link: `flex items-center gap-[11px]`, `rounded-full

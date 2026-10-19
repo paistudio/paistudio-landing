@@ -60,18 +60,21 @@ export default function AirtablePage() {
                 title: "Real Relational Data",
                 description: "Unlike a flat spreadsheet, Airtable development done right uses linked records and structured relationships.",
                 previewLabel: "Linked records view",
+                previewImage: { src: "/prismatic-icons/v2-airtable-1.png", alt: "Linked records view" },
               },
               {
                 title: "Non-Technical Accessibility",
                 description:
                   "One of the key advantages of working with us is a base your team can view, filter, and update without needing SQL.",
                 previewLabel: "Filtered team view",
+                previewImage: { src: "/prismatic-icons/v2-airtable-2.png", alt: "Filtered team view" },
               },
               {
                 title: "Fast to Deploy, Fast to Change",
                 description:
                   "As your operations evolve, structure matters. Our Airtable development approach means restructuring a base is far faster than migrating a traditional database.",
                 previewLabel: "Base restructure diff",
+                previewImage: { src: "/prismatic-icons/v2-airtable-3.png", alt: "Base restructure diff" },
               },
             ]}
           />

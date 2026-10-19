@@ -9,21 +9,11 @@ import { ProgressRail } from "@/components/ProgressRail";
 import { Testimonials } from "@/components/Testimonials";
 import { WorkGallery } from "@/components/WorkGallery";
 import { ScrollDriverProvider } from "@/lib/scroll/useScrollDriver";
-import { getWorkProjects } from "@/lib/data/work-projects";
 
-export default async function Home() {
-  // Falls back to WorkGallery's own static per-category gallery when this
-  // fails — e.g. a CMS schema migration (like `is_visible`) landed in code
-  // before actually being run against the database. The homepage must
-  // never 500 over that; a stale/placeholder gallery is an acceptable
-  // degradation, a broken homepage isn't.
-  let projects: Awaited<ReturnType<typeof getWorkProjects>> = [];
-  try {
-    projects = await getWorkProjects();
-  } catch (error) {
-    console.error("Home: getWorkProjects failed, falling back to static gallery", error);
-  }
-
+// Reverted to the static per-category gallery for now (on request) — see
+// WorkGallery's own `projects` prop for the CMS-driven path this used to
+// take; re-wire `getWorkProjects()` back in here when that's wanted again.
+export default function Home() {
   return (
     <ScrollDriverProvider workBgHex="#A8D6E5">
       <div className="relative w-full bg-ink text-text">
@@ -31,7 +21,7 @@ export default async function Home() {
         <Nav chromeVariant="v2" />
         <ProgressRail />
         <Hero />
-        <WorkGallery bgHex="#A8D6E5" lightBg projects={projects} />
+        <WorkGallery bgHex="#A8D6E5" lightBg />
         <CtaSection />
         <Testimonials />
         <Pricing />

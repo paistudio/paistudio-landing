@@ -66,18 +66,21 @@ export default function N8nPage() {
                 description:
                   "Unlike basic trigger-based tools, n8n automation supports multi-step workflows, conditional branching, looping, and custom scripting.",
                 previewLabel: "Conditional branch editor",
+                previewImage: { src: "/prismatic-icons/v2-n8n-1.png", alt: "Conditional branch editor" },
               },
               {
                 title: "Self-Hosted & Secure Infrastructure",
                 description:
                   "One of the key advantages of n8n automation is deployment flexibility — self-host for full control over data security, performance, and compliance.",
                 previewLabel: "Self-hosted deployment diagram",
+                previewImage: { src: "/prismatic-icons/v2-n8n-2.png", alt: "Self-hosted deployment diagram" },
               },
               {
                 title: "AI-Powered Workflows",
                 description:
                   "Modern operations demand intelligent systems. n8n automation integrates directly with AI services and APIs for smart routing, content generation, and data handling.",
                 previewLabel: "AI routing workflow",
+                previewImage: { src: "/prismatic-icons/v2-n8n-3.png", alt: "AI routing workflow" },
               },
             ]}
           />

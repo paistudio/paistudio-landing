@@ -65,12 +65,14 @@ export default function BubblePage() {
                 description:
                   "One of the key advantages of working with us is shipping real application logic without a full custom-code build cycle.",
                 previewLabel: "Build timeline comparison",
+                previewImage: { src: "/prismatic-icons/v2-bubble-2.png", alt: "Build timeline comparison" },
               },
               {
                 title: "API & Plugin Ecosystem",
                 description:
                   "As your app grows, structure matters. Our Bubble development approach connects to the external services your product actually needs.",
                 previewLabel: "Connected API list",
+                previewImage: { src: "/prismatic-icons/v2-bubble-3.png", alt: "Connected API list" },
               },
             ]}
           />

@@ -55,12 +55,17 @@ export function MegaMenu({ label, columns, panelWidthClassName, navOnLight = fal
   // flat `hover:bg-muted` regardless of `navOnLight`, while "Our
   // Work"/"Pricing" right next to it already split ink/16 vs white/20).
   const greyChromeOnLight = isGreyChrome && navOnLight;
+  // Mirrors Nav.tsx's own `pillLinkHoverClass` — the pill itself is now a
+  // solid `bg-ink` fill while `navOnLight`, not light glass, so this
+  // trigger's hover needs the same white-overlay treatment the dark-glass
+  // branch already used instead of the old ink-tint hover (see Nav.tsx's
+  // `textColorClass` comment for why).
   const triggerHoverClass = isGreyChrome
     ? greyChromeOnLight
-      ? "hover:bg-ink/16"
+      ? "hover:bg-ink/90"
       : "hover:bg-white/20"
     : isLightChrome
-      ? "hover:bg-ink/10"
+      ? "hover:bg-ink/90"
       : "hover:bg-white/14";
   const panelClass = isLightChrome
     ? "border-ink/10 bg-white/95 shadow-[0_18px_48px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.6)]"
