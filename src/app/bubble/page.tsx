@@ -50,6 +50,7 @@ export default function BubblePage() {
               { label: "50+ projects completed" },
             ]}
             cta={{ label: "Start Your Project", href: "#contact" }}
+            hideImages
           />
 
           <ValuePillarsSection

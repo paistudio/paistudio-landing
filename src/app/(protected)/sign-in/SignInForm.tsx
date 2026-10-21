@@ -44,6 +44,10 @@ export function SignInForm() {
         >
           {isPending ? "Signing in…" : "Sign in"}
         </button>
+
+        <a href="/sign-in/forgot-password" className="text-center text-sm text-muted hover:text-text">
+          Forgot password?
+        </a>
       </form>
     </div>
   );

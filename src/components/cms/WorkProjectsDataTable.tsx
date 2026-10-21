@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -60,9 +60,30 @@ import { Pagination, PaginationContent, PaginationItem } from "@/components/ui/p
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { WorkProjectDrawer } from "./WorkProjectDrawer";
 import { deleteWorkProject, toggleWorkProjectVisibility } from "@/lib/actions/cms-work-actions";
 import type { WorkProjectRow } from "@/lib/data/work-db";
 import { PROJECT_CATEGORIES } from "@/types/work";
+
+// Remembered across sessions so "rows per page" stays what it was last
+// set to (on request — "misalnya pagi ini aku set 10. nanti kalo login
+// lagi malam hari, tetap 10") instead of resetting to the default every
+// time this page loads. A per-browser convenience, not real data, so
+// `localStorage` is the right place for it rather than the database.
+const PAGE_SIZE_STORAGE_KEY = "paistudio-cms-work-page-size";
+const DEFAULT_PAGE_SIZE = 10;
+
+function readStoredPageSize(): number {
+  try {
+    const stored = localStorage.getItem(PAGE_SIZE_STORAGE_KEY);
+    const parsed = stored ? Number(stored) : NaN;
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : DEFAULT_PAGE_SIZE;
+  } catch {
+    // Private browsing / blocked storage — fall back to the default
+    // rather than breaking the table over a convenience feature.
+    return DEFAULT_PAGE_SIZE;
+  }
+}
 
 const titleFilterFn: FilterFn<WorkProjectRow> = (row, _columnId, filterValue: string) => {
   return row.original.title.toLowerCase().includes((filterValue ?? "").toLowerCase());
@@ -89,18 +110,17 @@ function VisibilityBadge({ visible }: { visible: boolean }) {
 }
 
 function RowActions({
-  slug,
-  title,
-  isVisible,
+  project,
   onDeleted,
   onToggled,
+  onEdit,
 }: {
-  slug: string;
-  title: string;
-  isVisible: boolean;
+  project: WorkProjectRow;
   onDeleted: (slug: string) => void;
   onToggled: (slug: string, isVisible: boolean) => void;
+  onEdit: (project: WorkProjectRow) => void;
 }) {
+  const { slug, title, is_visible: isVisible } = project;
   const [open, setOpen] = useState(false);
   const [toggling, setToggling] = useState(false);
 
@@ -137,13 +157,14 @@ function RowActions({
       >
         {isVisible ? <Eye size={16} /> : <EyeOff size={16} />}
       </button>
-      <Link
-        href={`/cms/work/${slug}/edit`}
+      <button
+        type="button"
         aria-label={`Edit ${title}`}
+        onClick={() => onEdit(project)}
         className="flex h-8 w-8 items-center justify-center rounded-lg text-muted transition hover:bg-cream hover:text-text"
       >
         <Pencil size={16} />
-      </Link>
+      </button>
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogTrigger asChild>
           <button
@@ -180,8 +201,26 @@ export function WorkProjectsDataTable({ projects: initialProjects }: { projects:
   const [sorting, setSorting] = useState<SortingState>([{ id: "sort_order", desc: false }]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: 10 });
+  // Starts at the SSR-safe default, then syncs to whatever was saved in
+  // `localStorage` right after mount (can't read `localStorage` during
+  // the initial render without risking a hydration mismatch) — see
+  // `readStoredPageSize` above.
+  const [pagination, setPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: DEFAULT_PAGE_SIZE });
+  useEffect(() => {
+    setPagination((prev) => ({ ...prev, pageSize: readStoredPageSize() }));
+  }, []);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [editingProject, setEditingProject] = useState<WorkProjectRow | null>(null);
+
+  // `ProjectForm`'s own save action redirects to `/cms/work` on success —
+  // since we're already here, that's a real navigation that re-fetches
+  // this page's Server Component and hands `initialProjects` down again
+  // (a new array reference, unlike any of this table's own local
+  // optimistic updates). Treat that as "a save just completed" and close
+  // the drawer, without `ProjectForm` needing an explicit success callback.
+  useEffect(() => {
+    setEditingProject(null);
+  }, [initialProjects]);
 
   function removeRow(slug: string) {
     setData((prev) => prev.filter((p) => p.slug !== slug));
@@ -266,13 +305,7 @@ export function WorkProjectsDataTable({ projects: initialProjects }: { projects:
         id: "actions",
         header: () => <span className="sr-only">Actions</span>,
         cell: ({ row }) => (
-          <RowActions
-            slug={row.original.slug}
-            title={row.original.title}
-            isVisible={row.original.is_visible}
-            onDeleted={removeRow}
-            onToggled={updateRowVisibility}
-          />
+          <RowActions project={row.original} onDeleted={removeRow} onToggled={updateRowVisibility} onEdit={setEditingProject} />
         ),
         size: 90,
         enableSorting: false,
@@ -518,7 +551,18 @@ export function WorkProjectsDataTable({ projects: initialProjects }: { projects:
           <Label htmlFor={id} className="max-sm:sr-only">
             Rows per page
           </Label>
-          <Select value={table.getState().pagination.pageSize.toString()} onValueChange={(value) => table.setPageSize(Number(value))}>
+          <Select
+            value={table.getState().pagination.pageSize.toString()}
+            onValueChange={(value) => {
+              table.setPageSize(Number(value));
+              try {
+                localStorage.setItem(PAGE_SIZE_STORAGE_KEY, value);
+              } catch {
+                // Private browsing / blocked storage — the change still
+                // applies for this session, it just won't be remembered.
+              }
+            }}
+          >
             <SelectTrigger id={id} className="w-fit whitespace-nowrap">
               <SelectValue />
             </SelectTrigger>
@@ -568,6 +612,8 @@ export function WorkProjectsDataTable({ projects: initialProjects }: { projects:
           </PaginationContent>
         </Pagination>
       </div>
+
+      <WorkProjectDrawer project={editingProject} onClose={() => setEditingProject(null)} />
     </div>
   );
 }

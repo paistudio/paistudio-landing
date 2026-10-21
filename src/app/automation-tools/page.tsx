@@ -117,11 +117,11 @@ export default function AutomationToolsPage() {
                 title: "Audit & Opportunity Mapping",
                 description:
                   "We review your current processes and rank automation opportunities by impact. This ensures your automation tools investment goes where it actually matters.",
-                // Overrides ProcessSection's default step-1 image
-                // (process-1.png) with process-5.png — an opportunity/
-                // impact ranking view, a better match for an audit step
-                // than the generic scoping-checklist default — on request.
-                image: { src: "/process/process-3.png", alt: "Automation opportunity ranking by impact" },
+                // Overrides ProcessSection's default step-1 image with an
+                // opportunity/impact ranking view, a better match for an
+                // audit step than the generic scoping-checklist default —
+                // on request.
+                image: { src: "/process/process-e.png", alt: "Automation opportunity ranking by impact" },
               },
               {
                 title: "Platform & Architecture Design",

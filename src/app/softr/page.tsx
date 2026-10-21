@@ -91,7 +91,7 @@ export default function SoftrPage() {
               {
                 label: "Portal & Interface Build",
                 description: "We build your client portal, directory, or dashboard interface.",
-                image: { src: "/services/softr-automation.png", alt: "Softr site editor — portal layout and pages" },
+                image: { src: "/services/softr-tools.png", alt: "Softr site editor — portal layout and pages" },
               },
               {
                 label: "Integration & Automation",

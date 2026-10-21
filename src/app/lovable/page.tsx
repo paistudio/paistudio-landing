@@ -120,12 +120,12 @@ export default function LovablePage() {
                 title: "Generate & Review",
                 description:
                   "We generate the initial application and review the output critically, not just accept it as-is.",
-                // Overrides ProcessSection's default step-2 image
-                // (process-2.png) with process-6.png — a generated-page
-                // template with a placeholder image block, a closer match
-                // for "reviewing generated output" than the generic
-                // design/dev/AI pipeline default — on request.
-                image: { src: "/process/process-6.png", alt: "Generated page template — heading, subheading, and image block" },
+                // Overrides ProcessSection's default step-2 image with a
+                // generated-page template with a placeholder image block,
+                // a closer match for "reviewing generated output" than
+                // the generic design/dev/AI pipeline default — on
+                // request.
+                image: { src: "/process/process-f.png", alt: "Generated page template — heading, subheading, and image block" },
               },
               {
                 title: "Refine, Extend & Launch",
