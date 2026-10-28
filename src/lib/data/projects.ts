@@ -46,7 +46,7 @@ export const PROJECTS: Project[] = [
     desc: "Connect your business tools and automate repetitive operations—from lead management and CRM updates to notifications, approvals, and AI-powered workflows.",
     skills: ["n8n Workflows", "App Integrations", "Data Sync", "Scheduled Jobs", "Alerts & Triggers"],
     gallery: [
-      { label: "1", src: "/work-gallery/automation-1-persyon.png", alt: "Persyon" },
+      { label: "1", src: "/work-gallery/automation-1-persyon-ab.png", alt: "Persyon" },
       { label: "2", src: "/work-gallery/automation-2-saleshub.png", alt: "SalesHub" },
       { label: "3", src: "/work-gallery/automation-3-surte.png", alt: "Surte" },
       { label: "4", src: "/work-gallery/automation-4-dispro-dashboard.png", alt: "Discovery Property — dashboard" },
