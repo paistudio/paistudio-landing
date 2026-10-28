@@ -15,13 +15,13 @@ import { ScrollDriverProvider } from "@/lib/scroll/useScrollDriver";
 // take; re-wire `getWorkProjects()` back in here when that's wanted again.
 export default function Home() {
   return (
-    <ScrollDriverProvider workBgHex="#A8D6E5">
+    <ScrollDriverProvider workBgHex="#09162f">
       <div className="relative w-full bg-ink text-text">
         <FixedBackground />
         <Nav chromeVariant="v2" />
         <ProgressRail />
         <Hero />
-        <WorkGallery bgHex="#A8D6E5" lightBg />
+        <WorkGallery bgHex="#09162f" />
         <CtaSection />
         <Testimonials />
         <Pricing />

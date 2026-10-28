@@ -161,18 +161,18 @@ export function WorkGallery({ bgHex = WORK_BG_HEX, lightBg = false, showBrandLog
                     <svg width="11" height="11" viewBox="0 0 10 10" fill="none" aria-hidden="true" className="shrink-0">
                       <path
                         d="M2 8L8 2M8 2H3M8 2V7"
-                        stroke={lightBg ? "#000000" : "#ffffff"}
+                        stroke="#ffffff"
                         strokeWidth="1.3"
                         strokeLinecap="round"
                         strokeLinejoin="round"
                       />
                     </svg>
-                    <span className={`text-[12px] font-medium tracking-[0.1em] uppercase ${lightBg ? "text-ink" : "text-white"}`}>Our Work</span>
+                    <span className={`text-[12px] font-medium tracking-[0.1em] uppercase text-white`}>Our Work</span>
                   </div>
-                  <h2 className="pai-work-h2 m-0 mb-4 text-[70px] leading-[1.04] font-bold tracking-[-0.56px] text-deep max-[560px]:text-[32px]">
+                  <h2 className="pai-work-h2 m-0 mb-4 text-[70px] leading-[1.04] font-bold tracking-[-0.56px] text-white max-[560px]:text-[32px]">
                     {project.name}
                   </h2>
-                  <p className="m-0 mb-6 max-w-[500px] text-[18px] leading-[1.4] font-medium text-muted">
+                  <p className="m-0 mb-6 max-w-[500px] text-[18px] leading-[1.4] font-medium text-[#f1f1f1]">
                     {project.desc}
                   </p>
                   <div className="mb-6 max-w-[500px] pt-5">
